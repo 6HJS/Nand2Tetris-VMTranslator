@@ -31,6 +31,14 @@ string VMParser::parseVMLine(string vmLine) {
             return asmw.vm_gt();
         } else if (tokens[0] == "lt") {
             return asmw.vm_lt();
+        } else if (tokens[0] == "and") {
+            return asmw.vm_and();
+        } else if (tokens[0] == "or") {
+            return asmw.vm_or();
+        } else if (tokens[0] == "not") {
+            return asmw.vm_not();
+        } else if (tokens[0] == "end") {
+            return asmw.vm_end();
         }
     } else if (tokens.size() == 2) {
         if (tokens[0] == "label") {

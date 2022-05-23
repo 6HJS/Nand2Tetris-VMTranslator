@@ -30,8 +30,9 @@ int main(int argc, char const *argv[]) {
             throw runtime_error("main(): unable to open file " + fnameIn);
         }
         string::size_type idx = fnameIn.find_last_of('.');  // find the base name
+        string fName = fnameIn.substr(0, idx);
         if (argc == 2) {
-            fnameOut = fnameIn.substr(0, idx) + ".asm";  // change to .hack
+            fnameOut = fName + ".asm";  // change the extension name to .asm
         } else if (argc == 3) {
             fnameOut = string(argv[2]);
         } else {
@@ -41,7 +42,8 @@ int main(int argc, char const *argv[]) {
         if (!fOut.is_open()) {
             throw runtime_error("main(): unable to open file " + fnameOut);
         }
-        moduleName = fnameIn.substr(0, idx);
+        string::size_type relPath = fnameIn.find_last_of('\\');      // find the base name
+        moduleName = fName.substr(relPath + 1, fName.length() - 1);  // keep the relative path part only
 
         cout << "output to " << fnameOut << endl;
         string line;
@@ -50,6 +52,7 @@ int main(int argc, char const *argv[]) {
             string wtof = vmp.parseVMLine(line);
             fOut << wtof;
         }
+        fOut << vmp.parseVMLine("end");
         // make sure all file streams are closed on finish up
         fIn.close();
         fOut.close();

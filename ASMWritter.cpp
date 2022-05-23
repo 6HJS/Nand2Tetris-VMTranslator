@@ -25,7 +25,7 @@ string ASMWritter::vm_add() {
     write("D=M");
     write("A=A-1");
     write("M=D+M");
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM sub operation assessed in Project 07 */
@@ -36,7 +36,7 @@ string ASMWritter::vm_sub() {
     write("D=M");
     write("A=A-1");
     write("M=M-D");
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM neg operation assessed in Project 07 */
@@ -46,7 +46,7 @@ string ASMWritter::vm_neg() {
     write("A=M");
     write("A=A-1");
     write("M=-M");
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM eq operation assessed in Project 07 */
@@ -72,7 +72,7 @@ string ASMWritter::vm_eq() {
     write("M=M+1");
 
     symbolCounter++;
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM gt operation assessed in Project 07 */
@@ -102,7 +102,7 @@ string ASMWritter::vm_gt() {
     write("M=M+1");
 
     symbolCounter++;
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM lt operation assessed in Project 07 */
@@ -132,7 +132,7 @@ string ASMWritter::vm_lt() {
     write("M=M+1");
 
     symbolCounter++;
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM and operation assessed in Project 07 */
@@ -143,7 +143,7 @@ string ASMWritter::vm_and() {
     write("D=M");
     write("A=A-1");
     write("M=D&M");
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM or operation assessed in Project 07 */
@@ -154,7 +154,7 @@ string ASMWritter::vm_or() {
     write("D=M");
     write("A=A-1");
     write("M=D|M");
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM not operation assessed in Project 07 */
@@ -164,7 +164,7 @@ string ASMWritter::vm_not() {
     write("A=M");
     write("A=A-1");
     write("M=!M");
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM push operation assessed in Project 07 */
@@ -206,7 +206,7 @@ string ASMWritter::vm_push(string segment, int offset) {
             write("M=M+1");
             break;
     }
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM pop operation assessed in Project 07 */
@@ -242,47 +242,56 @@ string ASMWritter::vm_pop(string segment, int offset) {
             write("M=D");
             break;
     }
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM label operation assessed in Project 08 */
 string ASMWritter::vm_label(string label) {
     ss_ASM.str(string());
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM goto operation assessed in Project 08 */
 string ASMWritter::vm_goto(string label) {
     ss_ASM.str(string());
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM if-goto operation assessed in Project 08 */
 string ASMWritter::vm_if(string label) {
     ss_ASM.str(string());
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM function operation assessed in Project 08 */
 string ASMWritter::vm_function(string function_name, int n_vars) {
     ss_ASM.str(string());
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM call operation assessed in Project 08 */
 string ASMWritter::vm_call(string function_name, int n_args) {
     ss_ASM.str(string());
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
 }
 
 /** Generate Hack Assembly code for a VM return operation assessed in Project 08 */
 string ASMWritter::vm_return() {
     ss_ASM.str(string());
-    return ss_ASM.str();
+    return ss_ASM.str() + "\n";
+}
+
+/** Generate Hack Assembly code for a VM not operation assessed in Project 07 */
+string ASMWritter::vm_end() {
+    ss_ASM.str(string());
+    write("(END)");
+    write("@END");
+    write("0;JMP");
+    return ss_ASM.str() + "\n";
 }
 
 void ASMWritter::write(string vmCode) {
-    if (vmCode.find("(") != string::npos)
+    if (vmCode.find("(") == string::npos)
         ss_ASM << "\t";  // put TAB if the ASM command is not a label
     ss_ASM << vmCode << endl;
 }

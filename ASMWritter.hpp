@@ -39,6 +39,9 @@ class ASMWritter {
     string vm_call(string function_name, int n_args);
     string vm_return();
 
+    /** End of the asm file */
+    string vm_end();
+
    private:
     void write(string vmCode);
     string registerName(string segment, int index);
