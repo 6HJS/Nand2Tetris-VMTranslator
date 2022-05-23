@@ -44,15 +44,13 @@ int main(int argc, char const *argv[]) {
         moduleName = fnameIn.substr(0, idx);
 
         cout << "output to " << fnameOut << endl;
-
-        /* Pre pass: read source file clean-up the code */
         string line;
-        /* read each line from the .asm file */
+        /* Read each line from the .vm file */
         while (getline(fIn, line)) {
             string wtof = vmp.parseVMLine(line);
             fOut << wtof;
         }
-
+        // make sure all file streams are closed on finish up
         fIn.close();
         fOut.close();
     }
