@@ -1,7 +1,6 @@
 #include <algorithm>  // STL algorithms like sort, search, copy, remove element...
 #include <fstream>    // read write files
 #include <iostream>   // display debug information in terminal
-#include <queue>      //internal buffer between each pass
 #include <string>     //instruction are saved as C++ stings.
 
 #include "VMParser.hpp"

@@ -15,6 +15,7 @@ ASMWritter::ASMWritter() {
 }
 
 ASMWritter::~ASMWritter() {
+    map_segments.clear();
 }
 
 /** Generate Hack Assembly code for a VM add operation assessed in Project 07 */
@@ -52,19 +53,23 @@ string ASMWritter::vm_neg() {
 /** Generate Hack Assembly code for a VM eq operation assessed in Project 07 */
 string ASMWritter::vm_eq() {
     ss_ASM.str(string());
-    string label("JEQ_" + moduleName + "_" + to_string(symbolCounter));
+    string labelTrue("JGT_TRUE_" + moduleName + "_" + to_string(symbolCounter));
+    string labelFalse("JGT_FALSE_" + moduleName + "_" + to_string(symbolCounter));
 
-    write("@SP // eq");
+    write("@SP // gt");
     write("AM=M-1");
     write("D=M");
     write("@SP");
     write("AM=M-1");
     write("D=M-D");
-    write("@" + label);
+    write("@" + labelTrue);
     write("D;JEQ");
-    write("D=1");
-    write("(" + label + ")");
-    write("D=D-1");
+    write("D=0");
+    write("@" + labelFalse);
+    write("0;JMP");
+    write("(" + labelTrue + ")");
+    write("D=-1");
+    write("(" + labelFalse + ")");
     write("@SP");
     write("A=M");
     write("M=D");

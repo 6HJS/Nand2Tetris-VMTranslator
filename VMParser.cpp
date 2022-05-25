@@ -1,8 +1,8 @@
 #include "VMParser.hpp"
 ASMWritter asmw;
-VMParser::VMParser() {
+VMParser::VMParser() {  // functions are hard-coded, nothing to be initialized
 }
-VMParser::~VMParser() {
+VMParser::~VMParser() {  // nothing to be desctructed.
 }
 
 string VMParser::parseVMLine(string vmLine) {
