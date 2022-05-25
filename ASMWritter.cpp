@@ -188,17 +188,12 @@ string ASMWritter::vm_push(string segment, int offset) {
             write("M=M+1");
             break;
         case seg_static:
+        case seg_argument:
+        case seg_local:
+        case seg_this:
+        case seg_that:
         case seg_temp:
         case seg_pointer:
-            write("@" + registerStr + " // push " + segment + " " + indexStr);
-            write("D=M");
-            write("@SP");
-            write("A=M");
-            write("M=D");
-            write("@SP");
-            write("M=M+1");
-            break;
-        default:
             write("@" + registerStr + " // push " + segment + " " + indexStr);
             write("D=M");
             write("@" + indexStr);
@@ -210,6 +205,8 @@ string ASMWritter::vm_push(string segment, int offset) {
             write("@SP");
             write("M=M+1");
             break;
+        default:
+            throw runtime_error("vm_push(): Invalid segment");
     }
     return ss_ASM.str() + "\n";
 }
@@ -224,15 +221,12 @@ string ASMWritter::vm_pop(string segment, int offset) {
             throw runtime_error("vm_pop(): cannot pop to constant");
             break;
         case seg_static:
+        case seg_argument:
+        case seg_local:
+        case seg_this:
+        case seg_that:
         case seg_temp:
         case seg_pointer:
-            write("@SP // pop " + segment + " " + indexStr);
-            write("AM=M-1");
-            write("D=M");
-            write("@" + registerStr);
-            write("M=D");
-            break;
-        default:
             write("@" + registerStr + " // pop " + segment + " " + indexStr);
             write("D=M");
             write("@" + indexStr);
@@ -246,6 +240,8 @@ string ASMWritter::vm_pop(string segment, int offset) {
             write("A=M");
             write("M=D");
             break;
+        default:
+            throw runtime_error("vm_pop(): Invalid segment");
     }
     return ss_ASM.str() + "\n";
 }
@@ -302,6 +298,7 @@ void ASMWritter::write(string vmCode) {
 }
 
 string ASMWritter::registerName(string segment, int index) {
+    if (segment == "static") return "16";
     if (segment == "local") return "LCL";
     if (segment == "argument") return "ARG";
     if (segment == "this") return "THIS";
