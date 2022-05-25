@@ -48,7 +48,7 @@ int main(int argc, char const *argv[]) {
         string line;
         /* Read each line from the .vm file */
         while (getline(fIn, line)) {
-            string wtof = vmp.parseVMLine(line);
+            string wtof = vmp.parseVMLine(line);  // write to output file
             fOut << wtof;
         }
         fOut << vmp.parseVMLine("end");
