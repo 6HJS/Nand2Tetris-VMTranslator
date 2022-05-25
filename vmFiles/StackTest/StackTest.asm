@@ -20,11 +20,14 @@
 	@SP
 	AM=M-1
 	D=M-D
-	@JEQ_StackTest_0
+	@JGT_TRUE_StackTest_0
 	D;JEQ
-	D=1
-(JEQ_StackTest_0)
-	D=D-1
+	D=0
+	@JGT_FALSE_StackTest_0
+	0;JMP
+(JGT_TRUE_StackTest_0)
+	D=-1
+(JGT_FALSE_StackTest_0)
 	@SP
 	A=M
 	M=D
@@ -53,11 +56,14 @@
 	@SP
 	AM=M-1
 	D=M-D
-	@JEQ_StackTest_1
+	@JGT_TRUE_StackTest_1
 	D;JEQ
-	D=1
-(JEQ_StackTest_1)
-	D=D-1
+	D=0
+	@JGT_FALSE_StackTest_1
+	0;JMP
+(JGT_TRUE_StackTest_1)
+	D=-1
+(JGT_FALSE_StackTest_1)
 	@SP
 	A=M
 	M=D
@@ -86,11 +92,14 @@
 	@SP
 	AM=M-1
 	D=M-D
-	@JEQ_StackTest_2
+	@JGT_TRUE_StackTest_2
 	D;JEQ
-	D=1
-(JEQ_StackTest_2)
-	D=D-1
+	D=0
+	@JGT_FALSE_StackTest_2
+	0;JMP
+(JGT_TRUE_StackTest_2)
+	D=-1
+(JGT_FALSE_StackTest_2)
 	@SP
 	A=M
 	M=D

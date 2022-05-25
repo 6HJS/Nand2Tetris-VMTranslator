@@ -56,7 +56,7 @@ string ASMWritter::vm_eq() {
     string labelTrue("JGT_TRUE_" + moduleName + "_" + to_string(symbolCounter));
     string labelFalse("JGT_FALSE_" + moduleName + "_" + to_string(symbolCounter));
 
-    write("@SP // gt");
+    write("@SP // eq");
     write("AM=M-1");
     write("D=M");
     write("@SP");
