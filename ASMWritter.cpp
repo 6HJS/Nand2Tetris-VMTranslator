@@ -188,6 +188,17 @@ string ASMWritter::vm_push(string segment, int offset) {
             write("M=M+1");
             break;
         case seg_static:
+            write("@" + registerStr + " // push " + segment + " " + indexStr);
+            write("D=A");
+            write("@" + indexStr);
+            write("A=D+A");
+            write("D=M");
+            write("@SP");
+            write("A=M");
+            write("M=D");
+            write("@SP");
+            write("M=M+1");
+            break;
         case seg_argument:
         case seg_local:
         case seg_this:
@@ -221,6 +232,19 @@ string ASMWritter::vm_pop(string segment, int offset) {
             throw runtime_error("vm_pop(): cannot pop to constant");
             break;
         case seg_static:
+            write("@" + registerStr + " // pop " + segment + " " + indexStr);
+            write("D=A");
+            write("@" + indexStr);
+            write("D=D+A");
+            write("@R13");
+            write("M=D");
+            write("@SP");
+            write("AM=M-1");
+            write("D=M");
+            write("@R13");
+            write("A=M");
+            write("M=D");
+            break;
         case seg_argument:
         case seg_local:
         case seg_this:

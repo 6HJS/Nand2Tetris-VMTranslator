@@ -1,3 +1,130 @@
-push constant 7
-push constant 8
+push constant 1
+push constant 2
 add
+pop static 0
+
+push constant 0
+push constant 0
+add
+pop static 0
+
+push constant 32767
+push constant 1
+add
+pop static 0
+
+push constant 2
+push constant 1
+sub
+pop static 0
+
+push constant 1
+push constant 2
+sub
+pop static 0
+
+push constant 0
+push constant 32767
+sub
+push constant 1
+sub
+pop static 0
+
+push constant 1
+neg
+pop static 0
+
+push constant 0
+neg
+pop static 0
+
+push constant 32767
+neg 
+pop static 0
+
+push constant 1
+push constant 1
+eq
+pop static 0
+
+push constant 0
+push constant 1
+eq
+pop static 0
+
+push constant 1
+push constant 0
+eq
+pop static 0
+
+push constant 1
+push constant 1
+gt
+pop static 0
+
+push constant 0
+push constant 1
+gt
+pop static 0
+
+push constant 1
+push constant 0
+gt
+pop static 0
+
+push constant 1
+push constant 1
+lt
+pop static 0
+
+push constant 0
+push constant 1
+lt
+pop static 0
+
+push constant 1
+push constant 0
+lt
+pop static 0
+
+push constant 0
+push constant 0
+and
+pop static 0
+
+push constant 1
+push constant 0
+and
+pop static 0
+
+push constant 1
+push constant 1
+and
+pop static 0
+
+push constant 0
+push constant 0
+or
+pop static 0
+
+push constant 1
+push constant 0
+or
+pop static 0
+
+push constant 1
+push constant 1
+or
+pop static 0
+
+push constant 0
+not
+pop static 0
+
+push constant 1
+not
+pop static 0
+
+push constant 32767
+not
+pop static 0
