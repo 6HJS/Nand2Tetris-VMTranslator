@@ -64,6 +64,10 @@ string VMParser::parseVMLine(string vmLine)
         {
             return asmw.vm_end();
         }
+        else if (tokens[0] == "return")
+        {
+            return asmw.vm_return();
+        }
     }
     else if (tokens.size() == 2)
     {

@@ -128,3 +128,7 @@ pop static 0
 push constant 32767
 not
 pop static 0
+
+function myFunc 2
+push constant 42
+return

@@ -289,7 +289,7 @@ string ASMWritter::vm_pop(string segment, int offset)
 string ASMWritter::vm_label(string label)
 {
     ss_ASM.str(string());
-    write("(" + label + ")");
+    write("(" + label + ") // label " + label);
     return ss_ASM.str() + "\n";
 }
 
@@ -297,7 +297,7 @@ string ASMWritter::vm_label(string label)
 string ASMWritter::vm_goto(string label)
 {
     ss_ASM.str(string());
-    write("@" + label);
+    write("@" + label + "// goto " + label);
     write("0;JMP");
     return ss_ASM.str() + "\n";
 }
@@ -306,7 +306,7 @@ string ASMWritter::vm_goto(string label)
 string ASMWritter::vm_if_goto(string label)
 {
     ss_ASM.str(string());
-    write("@SP");
+    write("@SP // if-goto " + label);
     write("AM=M-1");
     write("D=M");
     write("@" + label);
@@ -318,7 +318,7 @@ string ASMWritter::vm_if_goto(string label)
 string ASMWritter::vm_function(string function_name, int n_vars)
 {
     ss_ASM.str(string());
-    write("(" + function_name + ")");
+    write("(" + function_name + ") // function " + function_name + " " + to_string(n_vars));
     for (int n = n_vars; n > 0; n--)
     {
         write("@SP");
@@ -333,7 +333,7 @@ string ASMWritter::vm_function(string function_name, int n_vars)
 string ASMWritter::vm_call(string function_name, int n_args)
 {
     ss_ASM.str(string());
-    write("@return_address");
+    write("@return_address // call " + function_name + " " + to_string(n_args));
     write("D=A");
     write("@SP");
     write("AM=M+1");
@@ -341,18 +341,51 @@ string ASMWritter::vm_call(string function_name, int n_args)
     write("M=D");
 
     write("@LCL");
-    write("");
-    write("");
-    write("");
-    write("");
-    write("");
+    write("D=M");
+    write("@SP");
+    write("AM=M+1");
+    write("A=A-1");
+    write("M=D");
 
-    write("");
-    write("");
-    write("");
-    write("");
-    write("");
-    write("");
+    write("@ARG");
+    write("D=M");
+    write("@SP");
+    write("AM=M+1");
+    write("A=A-1");
+    write("M=D");
+
+    write("@THIS");
+    write("D=M");
+    write("@SP");
+    write("AM=M+1");
+    write("A=A-1");
+    write("M=D");
+
+    write("@THAT");
+    write("D=M");
+    write("@SP");
+    write("AM=M+1");
+    write("A=A-1");
+    write("M=D");
+
+    write("@SP");
+    write("D=M");
+    write("@5");
+    write("D=D-A");
+    write("@" + to_string(n_args));
+    write("D=D-A");
+    write("@ARG");
+    write("M=D");
+
+    write("@SP");
+    write("D=M");
+    write("@LCL");
+    write("M=D");
+
+    write("@funcName");
+    write("0;JMP");
+
+    write("(return_address)");
     return ss_ASM.str() + "\n";
 }
 
@@ -360,6 +393,66 @@ string ASMWritter::vm_call(string function_name, int n_args)
 string ASMWritter::vm_return()
 {
     ss_ASM.str(string());
+    write("@LCL // return");
+    write("D=M");
+    write("@R13");
+    write("M=D");
+
+    write("@R13");
+    write("D=M");
+    write("@5");
+    write("A=D-A");
+    write("D=M");
+    write("@R14");
+    write("M=D");
+
+    write("@SP");
+    write("AM=M-1");
+    write("D=M");
+    write("@ARG");
+    write("M=D");
+
+    write("@ARG");
+    write("D=M+1");
+    write("@SP");
+    write("M=D");
+
+    write("@R13");
+    write("D=M");
+    write("@1");
+    write("A=D-A");
+    write("D=M");
+    write("@THAT");
+    write("M=D");
+
+    write("@R13");
+    write("D=M");
+    write("@2");
+    write("A=D-A");
+    write("D=M");
+    write("@THIS");
+    write("M=D");
+
+    write("@R13");
+    write("D=M");
+    write("@3");
+    write("A=D-A");
+    write("D=M");
+    write("@ARG");
+    write("M=D");
+
+    write("@R13");
+    write("D=M");
+    write("@4");
+    write("A=D-A");
+    write("D=M");
+    write("@LCL");
+    write("M=D");
+
+    write("@R14");
+    write("A=M");
+    write("0;JMP");
+
     return ss_ASM.str() + "\n";
 }
 
@@ -367,7 +460,7 @@ string ASMWritter::vm_return()
 string ASMWritter::vm_end()
 {
     ss_ASM.str(string());
-    write("(END)");
+    write("(END) // END loop");
     write("@END");
     write("0;JMP");
     return ss_ASM.str() + "\n";
