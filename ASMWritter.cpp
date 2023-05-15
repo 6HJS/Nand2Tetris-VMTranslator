@@ -410,6 +410,7 @@ string ASMWritter::vm_return()
     write("AM=M-1");
     write("D=M");
     write("@ARG");
+    write("A=M");
     write("M=D");
 
     write("@ARG");
